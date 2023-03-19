@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import GoogleButton from '../components/GoogleButton';
+import './styles.css';
 
 const Authentication = () => {
   return (
-    <div>Authentication</div>
+    <div className='auth__container'>
+      <h1>
+        READER
+      </h1>
+      <GoogleButton />
+    </div>
   )
 }
 
-export default Authentication
+export default Authentication;
