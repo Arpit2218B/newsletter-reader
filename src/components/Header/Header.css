@@ -1,0 +1,21 @@
+.header__container {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--background);
+}
+
+.header__title {
+  color: var(--text-primary);
+  font-size: 20px;
+  letter-spacing: 8px;
+  padding: 20px 24px 0 24px;
+}
+
+.header__border {
+  border: none;
+  height: 1px;
+  background-color: var(--background-secondary);
+  margin: 20px 0;
+}
+

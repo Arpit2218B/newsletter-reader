@@ -1,0 +1,37 @@
+.item__container {
+  display: flex;
+  justify-content: flex-start;
+  background-color: var(--background-secondary);
+  border-radius: 4px;
+  padding: 16px;
+  margin: 24px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.item__image > img {
+  width: 100px;
+  aspect-ratio: 1;
+}
+
+.item__data {
+  flex: 5;
+}
+
+.item__date {
+  font-size: 10px;
+  color: var(--text-primary-50);
+}
+
+.item__heading {
+  margin: 8px 0 16px 0;
+}
+
+.item__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 10px;
+  color: var(--text-primary-70);
+}

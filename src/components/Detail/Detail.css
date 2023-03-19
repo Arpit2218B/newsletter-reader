@@ -1,0 +1,34 @@
+.detail__container {
+  margin: 24px;
+}
+
+.detail__heading {
+  font-size: 32px;
+  color: var(--text-primary);
+}
+
+.detail__metadata {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0 32px 0;
+}
+
+.detail__tag {
+  color: var(--text-primary-50);
+  background-color: var(--background-secondary);
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-size: 14px;
+}
+
+.detail__date {
+  font-size: 14px;
+  color: var(--text-primary-50);
+}
+
+.detail__description {
+  line-height: 20px;
+  font-size: 14px;
+  color: var(--text-primary);
+}
