@@ -7,8 +7,22 @@ export const fetchLabels = () => {
 }
 
 export const fetchDetails = (messageId, category) => {
+  const cache = JSON.parse(localStorage.getItem('detailsCache'));
+  if(cache) {
+    const data = cache[`https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}?`];
+    if(data) {
+      return data;
+    }
+  }
+
   return getAPI(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}?`)
-  .then(res => formatDetailsResponse(res, category));
+  .then(res => {
+    const response = formatDetailsResponse(res, category);
+    const cache = JSON.parse(localStorage.getItem('detailsCache')) || {};
+    cache[`https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}?`] = response;
+    localStorage.setItem('detailsCache', JSON.stringify(cache));
+    return response;
+  });
 }
 
 export const fetchList = async (labelId) => {
