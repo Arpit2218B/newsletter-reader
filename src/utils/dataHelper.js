@@ -13,14 +13,14 @@ export const formatLabelsResponse = (data) => {
   return finalData;
 }
 
-export const formatDetailsResponse = (data) => {
+export const formatDetailsResponse = (data, category) => {
   const finalData = {};
-  console.log(data);
   finalData['date'] = getDate(data.internalDate);
   finalData['heading'] = getSubject(data?.payload?.headers);
-  finalData['label'] = 'Kevin Powell';
+  finalData['label'] = category;
   finalData['rawHTML'] = getBody(data?.payload?.parts);
-  console.log(finalData);
+  finalData['snippet'] = data?.snippet;
+  finalData['id'] = data?.id;
   return finalData;
 }
 

@@ -10,8 +10,9 @@ export const getAPI = (url) => {
   })
   .then(res => res.json())
   .then(res => {
-    if(res.error) {
+    if(res.error && res.error.code === 401) {
       localStorage.removeItem('clientId');
+      localStorage.removeItem('filtersArr');
       const event = new Event(EVENT_NAME);
       window.dispatchEvent(event);
     }

@@ -6,7 +6,7 @@ import './Header.css';
 
 const Header = ({ filtersArr, selected, setSelected }) => {
   const location = useLocation();
-  const pageCondition = location.pathname !== '/details';
+  const pageCondition = location.pathname !== '/detail';
 
   return (
     <div className='header__container'>
