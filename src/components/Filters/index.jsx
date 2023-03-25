@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { fetchLabels } from '../../utils/apiServices';
+import React from 'react';
 import './Filters.css';
 
-const Filters = () => {
-  const [filtersArr, setFiltersArr] = useState([]);
-  const [selected, setSelected] = useState('');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const newFiltersArr = await fetchLabels();
-      setFiltersArr(newFiltersArr);
-      setSelected(newFiltersArr?.[0]);
-    }
-    fetchData();
-  }, []);
-
+const Filters = ({ filtersArr, selected, setSelected }) => {
   return (
     <div className='filter__container'>
       {
         filtersArr.map((ele, index) => (
-          <span 
+          <span
+          onClick={() => setSelected(ele.id)}
           key={index} 
-          className={`filter__element ${ele === selected ? 'filter__selected':  ''}`}>
-            {ele}
+          className={`filter__element ${ele.id === selected ? 'filter__selected':  ''}`}>
+            {ele.filterName}
           </span>
         ))
       }

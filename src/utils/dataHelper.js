@@ -3,7 +3,10 @@ import { encode, decode } from 'js-base64';
 export const formatLabelsResponse = (data) => {
   const filteredData = data.map(d => {
     if(d?.name?.includes('Newsletters/')) {
-      return d?.name?.split('Newsletters/')?.[1];
+      return {
+        ...d,
+        'filterName': d?.name?.split('Newsletters/')?.[1]
+      };
     }
   });
   const finalData = filteredData.filter(f => f);
