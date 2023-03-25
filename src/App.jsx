@@ -4,6 +4,22 @@ import Authentication from './pages/Authentication';
 import Details from './pages/details';
 import List from './pages/list';
 import { EVENT_NAME } from './utils/constants';
+import {
+  createBrowserRouter,
+  RouterProvider
+} from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <List />,
+  },
+  {
+    path: "/details",
+    element: <Details />,
+  },
+]);
+
 
 const App = () => {
   const loggedInData = useWatchLocalStorage('clientId', EVENT_NAME);
@@ -13,10 +29,7 @@ const App = () => {
   }
 
   return (
-    <div className="App" id="app">
-      {/* <List /> */}
-      <Details />
-    </div>
+    <RouterProvider router={router} />
   )
 }
 
