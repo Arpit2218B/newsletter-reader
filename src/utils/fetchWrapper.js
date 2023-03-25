@@ -1,6 +1,17 @@
 import { EVENT_NAME } from './constants';
 
-export const getAPI = (url) => {
+export const getAPI = (url, shouldCache = false) => {
+  if(shouldCache) {
+    const cache = JSON.parse(localStorage.getItem('apiCache'));
+    if(cache) {
+      const data = cache[url];
+      if(data) {
+        console.log(data)
+        return new Promise((resolve, reject) => resolve(data));
+      }
+    }
+  }
+
   const access_token = localStorage.getItem('clientId');
   return fetch(url, {
     method: "GET",
@@ -13,8 +24,15 @@ export const getAPI = (url) => {
     if(res.error && res.error.code === 401) {
       localStorage.removeItem('clientId');
       localStorage.removeItem('filtersArr');
+      localStorage.removeItem('apiCache');
       const event = new Event(EVENT_NAME);
       window.dispatchEvent(event);
+    }
+
+    if(shouldCache) {
+      const cache = JSON.parse(localStorage.getItem('apiCache')) || {};
+      cache[url] = res;
+      localStorage.setItem('apiCache', JSON.stringify(cache));
     }
     return res;
   });

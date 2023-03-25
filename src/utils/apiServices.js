@@ -7,20 +7,9 @@ export const fetchLabels = () => {
 }
 
 export const fetchDetails = (messageId, category) => {
-  const cache = JSON.parse(localStorage.getItem('detailsCache'));
-  if(cache) {
-    const data = cache[`https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}?`];
-    if(data) {
-      return data;
-    }
-  }
-
-  return getAPI(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}?`)
+  return getAPI(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}?`, true)
   .then(res => {
     const response = formatDetailsResponse(res, category);
-    const cache = JSON.parse(localStorage.getItem('detailsCache')) || {};
-    cache[`https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}?`] = response;
-    localStorage.setItem('detailsCache', JSON.stringify(cache));
     return response;
   });
 }
@@ -30,7 +19,7 @@ export const fetchList = async (labelId) => {
   if (labelId) {
     queryString = `${queryString}&labelIds=${labelId}`;
   }
-  const messageList = await getAPI(`https://gmail.googleapis.com/gmail/v1/users/me/messages?${queryString}`);
+  const messageList = await getAPI(`https://gmail.googleapis.com/gmail/v1/users/me/messages?${queryString}`, true);
   const finalArr = [];
   const result = await messageList?.messages.map(async (m) => {
     const response = await fetchDetails(m?.id);
