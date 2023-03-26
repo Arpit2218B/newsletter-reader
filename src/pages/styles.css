@@ -5,8 +5,10 @@
   align-items: center;
   height: 100vh;
   gap: 100px;
+  background-color: var(--text-primary);
 }
 
 .auth__container > h1 {
   font-size: 4em;
+  color: var(--background-secondary);
 }

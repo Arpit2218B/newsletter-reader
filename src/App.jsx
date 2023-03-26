@@ -1,6 +1,6 @@
 import './App.css';
 import useWatchLocalStorage from './hooks/useLocalStorage';
-import Authentication from './pages/Authentication';
+import Authentication from './pages/authentication';
 import Details from './pages/details';
 import List from './pages/list';
 import { EVENT_NAME } from './utils/constants';
