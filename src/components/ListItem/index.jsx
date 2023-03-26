@@ -10,7 +10,10 @@ const ListItem = (props) => {
           <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8&w=1000&q=80" />
         </div>
         <div className='item__data'>
-          <p className='item__date'>{props.date}</p>
+          <div className='item__metadataContainer'>
+            <p className='item__date'>{props.date}</p>
+            {props.isUnread && <p className='item__unread'>{props.isUnread ? 'UNREAD' : null}</p>}
+          </div>
           <p className='item__heading'>{props.heading}</p>
           <p className='item__description'>{props.snippet}</p>
         </div>

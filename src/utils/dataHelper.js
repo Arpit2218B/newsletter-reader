@@ -21,6 +21,7 @@ export const formatDetailsResponse = (data, category) => {
   finalData['rawHTML'] = getBody(data?.payload?.parts);
   finalData['snippet'] = data?.snippet;
   finalData['id'] = data?.id;
+  finalData['isUnread'] = data?.labelIds?.includes('UNREAD');
   return finalData;
 }
 

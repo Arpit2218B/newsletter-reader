@@ -28,6 +28,19 @@ a {
   color: var(--text-primary-50);
 }
 
+.item__metadataContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item__unread {
+  font-size: 10px;
+  color: var(--background-secondary);
+  font-weight: 700;
+  background-color: red;
+  padding: 4px;
+}
+
 .item__heading {
   margin: 8px 0 16px 0;
   display: -webkit-box;

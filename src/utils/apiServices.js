@@ -35,3 +35,24 @@ export const fetchList = async (labelId, pageToken) => {
     }
   });
 }
+
+export const markAsRead = (messageId) => {
+  const access_token = localStorage.getItem('clientId');
+  return fetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}/modify`, {
+    method: 'POST',
+    body: JSON.stringify({
+      "removeLabelIds": [
+        "UNREAD"
+      ]
+    }),
+    headers: {
+      "Authorization": `Bearer ${access_token}`,
+    },
+  })
+  .then(() => {
+    const cache = JSON.parse(localStorage.getItem('apiCache')) || {};
+    const url = `https://gmail.googleapis.com/gmail/v1/users/me/messages/${messageId}?`;
+    delete cache[url];
+    localStorage.setItem('apiCache', JSON.stringify(cache));
+  })
+}

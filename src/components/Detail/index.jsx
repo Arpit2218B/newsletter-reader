@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
-import { fetchDetails } from '../../utils/apiServices';
+import { fetchDetails, markAsRead } from '../../utils/apiServices';
 import './Detail.css';
 
 const Detail = () => {
   const [data, setData] = useState({});
   const location = useLocation();
   const headingRef = useRef();
+  const splitPath = location.search.split('&')
+  const id = splitPath[0].split('=')[1];
+  const category = splitPath[1].split('=')[1];
   useEffect(() => {
     const fetchData = async () => {
-      const splitPath = location.search.split('&')
-      const id = splitPath[0].split('=')[1];
-      const category = splitPath[1].split('=')[1];
       const response = await fetchDetails(id, category);
       setData(response);
     }
@@ -23,6 +23,12 @@ const Detail = () => {
       headingRef.current.scrollIntoView();
     }
   }, []);
+
+  useEffect(() => {
+    if(data.isUnread) {
+      markAsRead(id);
+    }
+  }, [data]);
 
   return (
     <div className='detail__container'>
