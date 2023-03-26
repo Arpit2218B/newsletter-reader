@@ -2,3 +2,21 @@
   background-color: var(--background);
   color: var(--text-primary);
 }
+
+.list__loadMoreContainer {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.list__loadMore {
+  width: 95%;
+  background-color: var(--text-primary);
+  color: var(--background);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.list__loadMore:disabled {
+  background-color: gray;
+}

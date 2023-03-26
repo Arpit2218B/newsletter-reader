@@ -14,10 +14,13 @@ export const fetchDetails = (messageId, category) => {
   });
 }
 
-export const fetchList = async (labelId) => {
+export const fetchList = async (labelId, pageToken) => {
   let queryString = 'maxResults=10';
   if (labelId) {
     queryString = `${queryString}&labelIds=${labelId}`;
+  }
+  if (pageToken) {
+    queryString = `${queryString}&pageToken=${pageToken}`;
   }
   const messageList = await getAPI(`https://gmail.googleapis.com/gmail/v1/users/me/messages?${queryString}`, true);
   const finalArr = [];
@@ -25,5 +28,10 @@ export const fetchList = async (labelId) => {
     const response = await fetchDetails(m?.id);
     return response;
   });
-  return Promise.all(result).then(v => v);
+  return Promise.all(result).then(v => {
+    return {
+      data: v,
+      nextToken: messageList.nextPageToken,
+    }
+  });
 }

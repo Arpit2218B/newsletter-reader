@@ -26,9 +26,14 @@ export const getAPI = (url, shouldCache = false) => {
     }
 
     if(shouldCache) {
-      const cache = JSON.parse(localStorage.getItem('apiCache')) || {};
-      cache[url] = res;
-      localStorage.setItem('apiCache', JSON.stringify(cache));
+      try {
+        const cache = JSON.parse(localStorage.getItem('apiCache')) || {};
+        cache[url] = res;
+        localStorage.setItem('apiCache', JSON.stringify(cache));
+      }
+      catch(err) {
+        localStorage.removeItem('apiCache');
+      }
     }
     return res;
   });

@@ -9,6 +9,8 @@ const List = () => {
   const [selected, setSelected] = useState('');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fetchMoreloading, setFetchMoreLoading] = useState(false);
+  const [nextPageToken, setNextPageToken] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,10 +25,20 @@ const List = () => {
     if(selected)
       setLoading(true);
       fetchList(selected.id).then(res => {
-        setData(res);
+        setData(res.data);
+        setNextPageToken(res.nextToken);
         setLoading(false);
       });
   }, [selected]);
+
+  const fetchMoreData = () => {
+    setFetchMoreLoading(true);
+    fetchList(selected.id, nextPageToken).then(res => {
+      setData((data) => [...data, ...res.data]);
+      setNextPageToken(res.nextToken);
+      setFetchMoreLoading(false);
+    });
+  }
 
   return (
     <div>
@@ -38,6 +50,9 @@ const List = () => {
           <ListItem {...d} category={selected} key={d.id} />
         ))
       }
+      <div className='list__loadMoreContainer'>
+        {nextPageToken && !loading && <button onClick={fetchMoreData} disabled={fetchMoreloading} className="list__loadMore">{fetchMoreloading ? 'Loading...' : 'Load more'}</button>}
+      </div>
     </div>
   )
 }
