@@ -36,6 +36,6 @@ const getSubject = (headers) => {
 }
 
 const getBody = (parts) => {
-  const HTMLPart = parts.filter(p => p.mimeType === 'text/html');
-  return decode(HTMLPart?.[0]?.body?.data);
+  const HTMLPart = parts?.filter(p => p.mimeType === 'text/html');
+  return decode(HTMLPart?.[0]?.body?.data || "");
 }

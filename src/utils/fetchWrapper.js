@@ -6,7 +6,6 @@ export const getAPI = (url, shouldCache = false) => {
     if(cache) {
       const data = cache[url];
       if(data) {
-        console.log(data)
         return new Promise((resolve, reject) => resolve(data));
       }
     }

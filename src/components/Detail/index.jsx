@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { fetchDetails } from '../../utils/apiServices';
 import './Detail.css';
@@ -6,6 +6,7 @@ import './Detail.css';
 const Detail = () => {
   const [data, setData] = useState({});
   const location = useLocation();
+  const headingRef = useRef();
   useEffect(() => {
     const fetchData = async () => {
       const splitPath = location.search.split('&')
@@ -15,11 +16,17 @@ const Detail = () => {
       setData(response);
     }
     fetchData();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    if(headingRef.current) {
+      headingRef.current.scrollIntoView();
+    }
+  }, []);
 
   return (
     <div className='detail__container'>
-      <h1 className='detail__heading'>{data?.heading}</h1>
+      <h1 className='detail__heading' ref={headingRef}>{data?.heading}</h1>
       <div className='detail__metadata'>
         <span className='detail__tag'>{decodeURI(data?.label?.split('Newsletters/')[1] || '')}</span>
         <span className='detail__date'>{data?.date}</span>
