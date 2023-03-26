@@ -1,4 +1,4 @@
-import { EVENT_NAME } from './constants';
+import { logout } from './helper';
 
 export const getAPI = (url, shouldCache = false) => {
   if(shouldCache) {
@@ -22,11 +22,8 @@ export const getAPI = (url, shouldCache = false) => {
   .then(res => res.json())
   .then(res => {
     if(res.error && res.error.code === 401) {
-      localStorage.removeItem('clientId');
-      localStorage.removeItem('filtersArr');
-      localStorage.removeItem('apiCache');
-      const event = new Event(EVENT_NAME);
-      window.dispatchEvent(event);
+      logout();
+      return;
     }
 
     if(shouldCache) {

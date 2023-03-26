@@ -10,17 +10,9 @@ const List = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const checkFiltersArr = JSON.parse(localStorage.getItem('filtersArr'));
-      if(checkFiltersArr) {
-        setFiltersArr(checkFiltersArr);
-        setSelected(checkFiltersArr?.[0]);
-        return;
-      }
-
       const newFiltersArr = await fetchLabels();
       setFiltersArr(newFiltersArr);
-      setSelected(newFiltersArr?.[0]?.id);
-      localStorage.setItem('filtersArr', JSON.stringify(newFiltersArr));
+      setSelected(newFiltersArr?.[0]);
     }
     fetchData();
   }, []);

@@ -5,11 +5,22 @@
   background-color: var(--background);
 }
 
+.header__titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .header__title {
   color: var(--text-primary);
   font-size: 20px;
   letter-spacing: 8px;
   padding: 20px 24px 0 24px;
+}
+
+.header__logout {
+  padding: 20px 24px 0 24px;
+  cursor: pointer;
 }
 
 .header__border {

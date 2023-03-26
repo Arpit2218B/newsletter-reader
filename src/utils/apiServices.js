@@ -2,7 +2,7 @@ import { formatDetailsResponse, formatLabelsResponse } from "./dataHelper";
 import { getAPI } from "./fetchWrapper";
 
 export const fetchLabels = () => {
-  return getAPI(`https://gmail.googleapis.com/gmail/v1/users/me/labels`)
+  return getAPI(`https://gmail.googleapis.com/gmail/v1/users/me/labels`, true)
   .then(res => formatLabelsResponse(res.labels));
 }
 
